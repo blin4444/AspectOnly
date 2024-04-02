@@ -5,5 +5,23 @@ public enum Operation {
 	Subtract,
 	Multiply,
 	Divide,
-	Power
+	Power;
+	
+	@Override
+    public String toString() {
+        switch (this) {
+        case Add:
+        	return "+";
+        case Subtract:
+        	return "-";
+        case Multiply:
+        	return "-";
+        case Divide:
+        	return "/";
+        case Power:
+        	return "^";
+        }
+        
+        return "";
+    }
 }

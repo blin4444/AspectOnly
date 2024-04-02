@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <properties>
+	    <aspectj.version>1.9.21</aspectj.version> <!-- specify your version -->
+	  </properties>
+
+    
+    <groupId>com.nixon</groupId>
+    <artifactId>AspectOnly</artifactId>
+    <version>1.0</version>
+
+    <name>${project.artifactId}-${project.version}</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+		<sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.15.0</version>
+                <dependencies>
+		          <dependency>
+		            <groupId>org.aspectj</groupId>
+		            <artifactId>aspectjtools</artifactId>
+		            <version>${aspectj.version}</version>
+		          </dependency>
+		        </dependencies>
+                <executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<complianceLevel>16</complianceLevel>
+							<source>16</source>
+							<!--<target>16</target>-->
+							<aspectDirectory>
+								src/com/nixon/aspectonly/aspect
+							</aspectDirectory>
+						</configuration>
+					</execution>
+				</executions>
+            </plugin>
+            <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.nixon.aspectonly.AspectOnly</mainClass>
+				</configuration>
+			</plugin>
+        </plugins>
+    </build>
+</project>
